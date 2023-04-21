@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { client }  from "../supabase/client";
+import { supabase }  from "../supabase/client";
 // Inicializamos función login
 function Login() {
     // Inicializamos variables donde almacenare el email por medio de evento onchange
@@ -14,10 +14,10 @@ function Login() {
         // ejecutamos petición asincrona
         try
         {
-            const { data , error } = await client.auth.signInWithOtp({
+            const { data , error } = await supabase.auth.signInWithOtp({
                 email: email,
                 options: {
-                  emailRedirectTo: 'http://localhost:8000/',
+                  emailRedirectTo: 'http://localhost:3001/',
                 },
             });
             console.log('data:');

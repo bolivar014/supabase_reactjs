@@ -1,14 +1,31 @@
 // imports
 import './App.css';
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 // Importamos modulo Login
 import Login from "./pages/Login";
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
+import { supabase } from './supabase/client';
 
 function App() {
+  const navigate = useNavigate();
+
+  // 
+  useEffect(() => {
+    // Función de supabase que detecta cambios en la sesión
+    supabase.auth.onAuthStateChange((event, session) => {
+      // console.log(event, session);
+      if(!session){ 
+        navigate('/login')
+      } else {
+        navigate('/')
+      }
+    })
+  }, [])
+
   return (
     <div className="App">
       <Routes>
