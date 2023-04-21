@@ -17,14 +17,15 @@ function App() {
   useEffect(() => {
     // Función de supabase que detecta cambios en la sesión
     supabase.auth.onAuthStateChange((event, session) => {
-      // console.log(event, session);
+      console.log("event, session");
+      console.log(event, session);
       if(!session){ 
         navigate('/login')
       } else {
         navigate('/')
       }
     })
-  }, [])
+  }, [navigate])
 
   return (
     <div className="App">

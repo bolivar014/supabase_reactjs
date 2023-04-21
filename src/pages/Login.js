@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { supabase }  from "../supabase/client";
+import { useNavigate } from "react-router-dom";
 // Inicializamos función login
 function Login() {
     // Inicializamos variables donde almacenare el email por medio de evento onchange
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,6 +33,12 @@ function Login() {
             console.error(error);
         }
     }
+
+    useEffect(()=> {
+        if(supabase.auth.getUser()){
+            navigate("/");
+        }
+    }, [navigate]);
 
     // Retornamos componente login
     return (
