@@ -14,14 +14,16 @@ function Login() {
         // ejecutamos petición asincrona
         try
         {
-            const result = await client.auth.signInWithOtp({
-                email,
+            const { data , error } = await client.auth.signInWithOtp({
+                email: email,
                 options: {
-                  emailRedirectTo: 'https://www.facebook.com',
+                  emailRedirectTo: 'http://localhost:8000/',
                 },
             });
-            console.log('result:');
-            console.log(result);
+            console.log('data:');
+            console.log(data);
+            console.log('errorDATA:');
+            console.log(error);
         }
         catch(error)
         {
