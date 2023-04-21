@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 // Exportamos contexto global
 export const TaskContext = createContext()
@@ -11,7 +11,9 @@ export const useTasks = () => {
 }
 
 export const TaskContextProvider = ({ children }) => {
-    return <TaskContext.Provider value={{name: "Hello world"}}>
+    const [tasks, setTask] = useState([]);
+
+    return <TaskContext.Provider value={{ tasks }}>
         { children }
     </TaskContext.Provider>
 }
