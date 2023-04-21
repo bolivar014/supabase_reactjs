@@ -22,10 +22,10 @@ function Login() {
                   emailRedirectTo: 'http://localhost:3001/',
                 },
             });
-            console.log('data:');
-            console.log(data);
-            console.log('errorDATA:');
-            console.log(error);
+            // console.log('data:');
+            // console.log(data);
+            // console.log('errorDATA:');
+            // console.log(error);
         }
         catch(error)
         {

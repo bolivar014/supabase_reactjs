@@ -10,7 +10,11 @@ function TaskForm() {
         // console.log(taskName);
         try
         {
+            // Obtengo la información de la sesión en curso
             const user = await supabase.auth.getUser();
+            console.log('userr: _-----------------------')
+            console.log(user);
+            // Inserto en la tabla 
             const result = await supabase.from('tasks').insert({
                 name: taskName,
                 userid: user.data.user.id

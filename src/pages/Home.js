@@ -9,8 +9,8 @@ import TaskList from "../components/TaskList";
 function Home() {
     const navigate = useNavigate();
     // Obtenemos el contexto "Variable global en TaskContext"
-    const {tasks} = useTasks();
-    console.log(tasks)
+    // const {tasks} = useTasks();
+    // console.log(tasks)
 
     useEffect(() => {
         if(!supabase.auth.getUser()) {

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { supabase } from "../supabase/client";
 
 // Exportamos contexto global
 export const TaskContext = createContext()
@@ -13,7 +14,12 @@ export const useTasks = () => {
 export const TaskContextProvider = ({ children }) => {
     const [tasks, setTask] = useState([]);
 
-    return <TaskContext.Provider value={{ tasks }}>
+    const getTasks = async () => {
+        const result = await  supabase.from("tasks").select();
+        console.log(result);
+    }
+
+    return <TaskContext.Provider value={{ tasks, getTasks }}>
         { children }
     </TaskContext.Provider>
 }
