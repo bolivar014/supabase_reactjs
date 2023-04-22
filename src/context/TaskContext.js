@@ -14,8 +14,13 @@ export const useTasks = () => {
 
 export const TaskContextProvider = ({ children }) => {
     const [tasks, setTask] = useState([]);
+    const [adding, setAdding] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const getTasks = async (done = false) => {
+        // 
+        setLoading(true)
+
         const user = await supabase.auth.getUser();
         // Buscamos todas las task asociados a la sesión actual.
         const { error, data } = await supabase
@@ -28,6 +33,9 @@ export const TaskContextProvider = ({ children }) => {
         if(error) throw error;
 
         setTask(data)
+    
+        // 
+        setLoading(false)
     }
 
     // Contexto para crear tareas
@@ -55,7 +63,7 @@ export const TaskContextProvider = ({ children }) => {
         }
     }
 
-    return <TaskContext.Provider value={{ tasks, getTasks, createTask }}>
+    return <TaskContext.Provider value={{ tasks, getTasks, createTask, loading }}>
         { children }
     </TaskContext.Provider>
 }
