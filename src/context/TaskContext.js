@@ -77,7 +77,30 @@ export const TaskContextProvider = ({ children }) => {
 
         getTasks()
     }
-    return <TaskContext.Provider value={{ tasks, getTasks, createTask, loading, deleteTask }}>
+
+    const updateTask = async (id, updateFields) => {
+        // console.log("id, updateFields")
+        // console.log(id, updateFields)
+        
+        const user = await supabase.auth.getUser();
+        const { error, data } = await supabase.from('tasks')
+            .update(updateFields)
+            .eq("userid", user.data.user.id)
+            .eq("id", id);
+        
+        if(error) throw error;
+
+        getTasks()
+    }
+
+    return <TaskContext.Provider 
+        value={{ 
+            tasks, 
+            getTasks, 
+            createTask, 
+            loading, 
+            deleteTask, 
+            updateTask }}>
         { children }
     </TaskContext.Provider>
 }

@@ -7,7 +7,7 @@ function TaskList() {
     const { tasks, getTasks, loading } = useTasks();
 
     useEffect(() => {
-        getTasks();
+        getTasks(true);
     }, [])
 
     function renderTasks() {

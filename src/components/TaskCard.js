@@ -1,7 +1,7 @@
 import { useTasks } from "../context/TaskContext"
 
 function TaskCard({ task }) {
-    const { deleteTask } = useTasks()
+    const { deleteTask, updateTask } = useTasks()
 
     const handleDelete = () => {
         // alert('deleting')
@@ -9,7 +9,8 @@ function TaskCard({ task }) {
     }
 
     const handleToggleDone = () => {
-        alert('toggle')
+        // alert('toggle')
+        updateTask(task.id, { done: !task.done })
     }
 
     return (
