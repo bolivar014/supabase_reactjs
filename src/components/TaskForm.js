@@ -1,30 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import { supabase } from "../supabase/client";
+import { useTasks } from "../context/TaskContext";
 
 function TaskForm() {
     const [taskName, setTaskName] = useState("");
+    const { createTask } = useTasks();
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(taskName);
-        try
-        {
-            // Obtengo la información de la sesión en curso
-            const user = await supabase.auth.getUser();
-            console.log('userr: _-----------------------')
-            console.log(user);
-            // Inserto en la tabla 
-            const result = await supabase.from('tasks').insert({
-                name: taskName,
-                userid: user.data.user.id
-            })
-
-            console.log(result);
-        } 
-        catch(error) {
-            console.log(error);
-        }
+        
+        // Evento para la creación de Task
+        createTask(taskName);
     }
 
     return (
