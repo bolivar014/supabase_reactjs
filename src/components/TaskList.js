@@ -5,13 +5,12 @@ import TaskCard from "./TaskCard";
 // Función TaskList
 function TaskList() {
     const { tasks, getTasks, loading } = useTasks();
-    console.log(tasks)
 
     useEffect(() => {
         getTasks();
     }, [])
 
-    function renderTask() {
+    function renderTasks() {
         if(loading) {
             return <p>Loading...</p>
         } else if(tasks.length == 0) {
@@ -25,13 +24,13 @@ function TaskList() {
                         ))
                     }
                 </div>
-            )
+            );
         }
-
-        return <div>
-            { renderTask() }
-        </div>
     }
+    
+    return <div>
+        { renderTasks() }
+    </div>
 }
 
 // Exportamos
