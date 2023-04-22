@@ -63,7 +63,21 @@ export const TaskContextProvider = ({ children }) => {
         }
     }
 
-    return <TaskContext.Provider value={{ tasks, getTasks, createTask, loading }}>
+    const deleteTask = async (id) => {
+        // console.log(id);
+        const user = await supabase.auth.getUser();
+
+        // Eliminamos
+        const { error, data } = await supabase.from('tasks')
+            .delete()
+            .eq("userid", user.data.user.id)
+            .eq("id", id)
+
+        if(error) throw error;
+
+        getTasks()
+    }
+    return <TaskContext.Provider value={{ tasks, getTasks, createTask, loading, deleteTask }}>
         { children }
     </TaskContext.Provider>
 }
