@@ -14,9 +14,21 @@ export const useTasks = () => {
 export const TaskContextProvider = ({ children }) => {
     const [tasks, setTask] = useState([]);
 
-    const getTasks = async () => {
-        const result = await  supabase.from("tasks").select();
-        console.log(result);
+    const getTasks = async (done = false) => {
+        const user = await supabase.auth.getUser();
+        // Buscamos todas las task asociados a la sesión actual.
+        const { error, data } = await supabase.from("tasks")
+            .select()
+            .eq("userid", user.data.user.id)
+            .eq("done", done)
+            .order("id", { ascending: true });
+
+        if(error) throw error;
+
+        setTask(data)
+
+        console.log("data - GetTask");
+        console.log(data);
     }
 
     return <TaskContext.Provider value={{ tasks, getTasks }}>
