@@ -3,12 +3,12 @@ import { useTasks } from '../context/TaskContext';
 import TaskCard from "./TaskCard";
 
 // Función TaskList
-function TaskList() {
+function TaskList({ done = false }) {
     const { tasks, getTasks, loading } = useTasks();
 
     useEffect(() => {
-        getTasks(true);
-    }, [])
+        getTasks(done);
+    }, [done])
 
     function renderTasks() {
         if(loading) {
