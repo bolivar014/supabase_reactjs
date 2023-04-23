@@ -20,9 +20,8 @@ function Home() {
     }, [navigate])
     
     return (
-        <div>
+        <div className="row pt-4">
             Home
-            <button onClick={() => supabase.auth.signOut()}>Logout</button>
 
             <TaskForm />
 

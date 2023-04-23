@@ -14,6 +14,9 @@ import { supabase } from './supabase/client';
 // Importamos contexto provider
 import { TaskContextProvider } from './context/TaskContext';
 
+// Importamos navbar
+import Navbar from './components/Navbar';
+
 function App() {
   const navigate = useNavigate();
 
@@ -34,11 +37,14 @@ function App() {
   return (
     <div className="App">
       <TaskContextProvider>
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/*' element={<NotFound />}/>
-        </Routes>
+        <Navbar />
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/*' element={<NotFound />}/>
+          </Routes>
+        </div>
       </TaskContextProvider>
     </div>
   );
