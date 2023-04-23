@@ -16,14 +16,20 @@ function TaskForm() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="card card-body">
                 <input 
                     type="text" 
                     name="taskName" 
                     placeholder="Write a Task Name"
                     onChange={(e) => setTaskName(e.target.value)}
+                    value={taskName}
+                    className="form-control mb-2"
                 />
-                <button>Add</button>
+               <div className="ms-auto">
+                    <button className="btn btn-primary btn-sm">
+                        { "Add" }
+                    </button>
+               </div>
             </form>
         </div>
     );

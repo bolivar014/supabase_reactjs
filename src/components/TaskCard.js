@@ -14,14 +14,20 @@ function TaskCard({ task }) {
     }
 
     return (
-        <div>
-            <h1>{ task.name }</h1>
-            <p>{ JSON.stringify(task.done) }</p>
-            <div>
-                <button onClick={ () => handleDelete() }>
+        <div className="card card-body">
+            <h1 className="h5">
+                { `${task.id}. ${task.name}` }
+            </h1>
+            <p>{ task.done ? "Done✔️" : "Not done❌" }</p>
+            <div className="ms-auto">
+                <button
+                    className="btn btn-danger btn-sm me-1" 
+                    onClick={ () => handleDelete() }>
                     Delete
                 </button>
-                <button onClick={ () => handleToggleDone() }>
+                <button 
+                    className="btn btn-secondary btn-sm" 
+                    onClick={ () => handleToggleDone() }>
                     Done
                 </button>
             </div>
