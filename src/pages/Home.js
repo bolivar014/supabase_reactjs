@@ -21,18 +21,24 @@ function Home() {
     
     return (
         <div className="row pt-4">
-            Home
+            <div className="col-md-4 offset-md-4">
+                <TaskForm />
 
-            <TaskForm />
+                <header className="d-flex justify-content-between my-3">
+                    <span className="h5">
+                        { showTaskDone ? "Task done" : "Tasks to do" }
+                    </span>
+                    <button 
+                        className="btn btn-primary btn-sm"
+                        onClick={() => setShowTaskDone(!showTaskDone) }
+                        >
+                        { showTaskDone ? "Show Tasks to do" : "Show Tasks Done" }
+                    </button>
+                </header>
 
-            <header>
-                <span>Task Pending</span>
-                <button onClick={() => setShowTaskDone(!showTaskDone) }>
-                    Show Tasks Done
-                </button>
-            </header>
+                <TaskList done={ showTaskDone }/>
+            </div>
             
-            <TaskList done={ showTaskDone }/>
         </div>
     );
 }
