@@ -17,6 +17,7 @@ import { TaskContextProvider } from './context/TaskContext';
 
 // Importamos navbar
 import Navbar from './components/Navbar';
+import RegisterPW from './pages/RegisterPw';
 
 function App() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function App() {
       console.log("event, session");
       console.log(event, session);
       if(!session){ 
-        navigate('/login')
+        navigate('/registerPw')
       } else {
         navigate('/')
       }
@@ -44,6 +45,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/login' element={<Login />}/>
             <Route path='/register' element={<Register />}/>
+            <Route path='/registerPw' element={<RegisterPW />}/>
             <Route path='/*' element={<NotFound />}/>
           </Routes>
         </div>
