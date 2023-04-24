@@ -28,7 +28,7 @@ function App() {
       console.log("event, session");
       console.log(event, session);
       if(!session){ 
-        navigate('/register')
+        navigate('/login')
       } else {
         navigate('/')
       }

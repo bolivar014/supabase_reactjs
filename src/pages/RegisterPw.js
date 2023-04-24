@@ -2,10 +2,9 @@ import { useEffect, useState } from "react"
 import { supabase }  from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 // Inicializamos función login
-function Login() {
+function Register() {
     // Inicializamos variables donde almacenare el email por medio de evento onchange
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -13,20 +12,20 @@ function Login() {
 
         // Imprimimos...
         console.log('Email: ' + email);
-        console.log('password: ' + password);
 
         // ejecutamos petición asincrona
         try
         {
-            // const { data , error } = await supabase.auth.signInWithPassword({
-            const { data , error } = await supabase.auth.signInWithPassword({
+            const { data , error } = await supabase.auth.signInWithOtp({
                 email: email,
-                password: password,
+                options: {
+                  emailRedirectTo: 'http://localhost:3001/',
+                },
             });
-            console.log('data:');
-            console.log(data);
-            console.log('errorDATA:');
-            console.log(error);
+            // console.log('data:');
+            // console.log(data);
+            // console.log('errorDATA:');
+            // console.log(error);
         }
         catch(error)
         {
@@ -36,9 +35,9 @@ function Login() {
     }
 
     useEffect(()=> {
-        // if(supabase.auth.getUser()){
-        //     navigate("/");
-        // }
+        if(supabase.auth.getUser()){
+            navigate("/");
+        }
     }, [navigate]);
 
     // Retornamos componente login
@@ -53,13 +52,6 @@ function Login() {
                         onChange={(e) => setEmail(e.target.value)}
                         className="form-control mb-2"
                     />
-                    <input 
-                        type="password" 
-                        name="password" 
-                        placeholder="yourPassword"
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="form-control mb-2"
-                    />
                     <button className="btn btn-primary">Send</button>
                 </form>
             </div>
@@ -69,4 +61,4 @@ function Login() {
 
 
 // Exportamos
-export default Login
+export default Register
