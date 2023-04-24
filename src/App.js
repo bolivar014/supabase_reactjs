@@ -44,7 +44,7 @@ function App() {
         } else if(location.pathname == "/login") {
           navigate('/login')
         } else {
-          navigate('/registerPw')
+          navigate('/login')
         }
       } else {
         // Rutas con sesión
