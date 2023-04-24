@@ -1,7 +1,7 @@
 // imports
 import './App.css';
 import { useEffect } from 'react';
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 // Importamos modulos vistas
 import Login from "./pages/Login";
@@ -21,16 +21,33 @@ import RegisterPW from './pages/RegisterPw';
 
 function App() {
   const navigate = useNavigate();
-
+  const location = useLocation();
   // 
   useEffect(() => {
     // Función de supabase que detecta cambios en la sesión
     supabase.auth.onAuthStateChange((event, session) => {
+      console.log(location.pathname);
       console.log("event, session");
       console.log(event, session);
-      if(!session){ 
-        navigate('/registerPw')
+      // if(!session){ 
+      //   navigate('/register')
+      // } else {
+      //   navigate('/')
+      // }
+
+      if(!session){
+        // control de rutas sin sesión
+        if(location.pathname == "/register") {
+          navigate('/register')
+        } else if(location.pathname == "/registerPw") {
+          navigate('/registerPw')
+        } else if(location.pathname == "/login") {
+          navigate('/login')
+        } else {
+          navigate('/registerPw')
+        }
       } else {
+        // Rutas con sesión
         navigate('/')
       }
     })

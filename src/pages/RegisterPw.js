@@ -41,9 +41,9 @@ function RegisterPW() {
     }
 
     useEffect(()=> {
-        if(supabase.auth.getUser()){
-            navigate("/");
-        }
+        // if(!supabase.auth.getUser()){
+        //     navigate("/login");
+        // }
     }, [navigate]);
 
     // Retornamos componente login
